@@ -67,10 +67,23 @@ ApplicationWindow {
         HomeForm{
             id: idHomeForm
         }
+
         Page1Form{
             id: idPage1Form
             visible: false
-            button.onClicked:{
+            mouseClick.onClicked: { // Clear the text when the area is clicked
+                textInput.selectAll()
+                textInput.forceActiveFocus()
+            }
+            mouseClick1.onClicked: {
+                textInput1.selectAll()
+                textInput1.forceActiveFocus()
+            }
+            mouseClick2.onClicked: {
+                textInput2.selectAll()
+                textInput2.forceActiveFocus()
+            }
+            button.onClicked:{ // When the "Create exercise" button is clicked, add an element to the list according to color
                 if(idPage1Form.comboBox.currentIndex===0){
                     idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Blue"})
                 }
@@ -80,8 +93,11 @@ ApplicationWindow {
                 if(idPage1Form.comboBox.currentIndex===2){
                     idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Red"})
                 }
+                comboBox.currentIndex = 0 // Set values back to default
+                textInput.text = "Enter here"
+                textInput1.text = "Enter here"
+                textInput2.text = "Enter here"
             }
         }
     }
-    //button.onClicked: stackView.push("Page1Form.ui.qml")
 }

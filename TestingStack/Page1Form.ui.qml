@@ -9,7 +9,14 @@ Page {
     property alias model: listView.model
     property string exerciseName: ""
     property alias comboBox: comboBox
-    //property alias eType:
+
+    property alias textInput: textInput
+    property alias textInput1: textInput1
+    property alias textInput2: textInput2
+
+    property alias mouseClick: mouseClick
+    property alias mouseClick1: mouseClick1
+    property alias mouseClick2: mouseClick2
 
     title: qsTr("Exercises")
 
@@ -29,25 +36,6 @@ Page {
         clip: true
         model: ListModel {
             id: listModel
-            /*ListElement {
-                name: "Grey"
-                colorCode: "grey"
-            }
-
-            ListElement {
-                name: "Red"
-                colorCode: "red"
-            }
-
-            ListElement {
-                name: "Blue"
-                colorCode: "blue"
-            }
-
-            ListElement {
-                name: "Green"
-                colorCode: "green"
-            }*/
         }
         delegate: Item {
             x: 5
@@ -91,15 +79,23 @@ Page {
             anchors.rightMargin: 5
             border.color: "#524d4d"
 
+            MouseArea {
+                id: mouseClick
+                anchors.fill: parent
+            }
+
             TextInput {
                 id: textInput
                 y: 0
-                text: qsTr("Enter here")
+                width: 62
+                height: 14
+                //text: qsTr("Enter here")
+                text: "Enter here"
+                anchors.verticalCenterOffset: 0
                 anchors.left: parent.left
                 anchors.leftMargin: 5
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 12
-
                 onEditingFinished: idPage.exerciseName = text
             }
         }
@@ -172,6 +168,12 @@ Page {
             y: 129
             height: 30
             color: "#ffffff"
+
+            MouseArea {
+                id: mouseClick1
+                anchors.fill: parent
+            }
+
             TextInput {
                 id: textInput1
                 y: 0
@@ -181,6 +183,7 @@ Page {
                 anchors.left: parent.left
                 anchors.leftMargin: 5
             }
+
             anchors.rightMargin: 5
             border.color: "#524d4d"
             anchors.right: parent.right
@@ -216,6 +219,12 @@ Page {
             y: 203
             height: 131
             color: "#ffffff"
+
+            MouseArea{
+                anchors.fill: parent
+                id: mouseClick2
+            }
+
             TextInput {
                 id: textInput2
                 text: qsTr("Enter here")
@@ -225,6 +234,7 @@ Page {
                 anchors.left: parent.left
                 anchors.leftMargin: 5
             }
+
             anchors.rightMargin: 5
             border.color: "#524d4d"
             anchors.right: parent.right
@@ -259,11 +269,17 @@ Page {
 
 
 
+
+
+
+
 /*##^## Designer {
-    D{i:5;anchors_height:20;anchors_width:80;anchors_x:60;anchors_y:12}D{i:13;anchors_x:0}
-D{i:12;anchors_width:203;anchors_x:96}D{i:14;anchors_x:14}D{i:15;anchors_width:202;anchors_x:98}
-D{i:17;anchors_x:293}D{i:18;anchors_width:275;anchors_x:35}D{i:21;anchors_x:0}D{i:20;anchors_width:203;anchors_x:96}
-D{i:22;anchors_x:293}D{i:23;anchors_x:293}D{i:25;anchors_x:0;anchors_y:0}D{i:24;anchors_width:203;anchors_x:96}
-D{i:11;anchors_width:304;anchors_x:286}
+    D{i:5;anchors_height:20;anchors_width:80;anchors_x:60;anchors_y:12}D{i:8;anchors_width:203;anchors_x:96}
+D{i:11;anchors_width:304;anchors_x:286}D{i:12;anchors_width:203;anchors_x:96}D{i:13;anchors_width:203;anchors_x:0}
+D{i:14;anchors_x:14}D{i:16;anchors_width:202;anchors_x:98}D{i:15;anchors_width:202;anchors_x:98}
+D{i:18;anchors_width:275;anchors_x:35}D{i:17;anchors_width:203;anchors_x:293}D{i:20;anchors_width:203;anchors_x:96}
+D{i:21;anchors_width:203;anchors_x:0}D{i:23;anchors_x:293}D{i:24;anchors_width:203;anchors_x:96}
+D{i:22;anchors_width:203;anchors_x:293}D{i:7;anchors_width:304;anchors_x:286}D{i:26;anchors_width:203;anchors_x:96}
+D{i:25;anchors_x:0;anchors_y:0}
 }
  ##^##*/
