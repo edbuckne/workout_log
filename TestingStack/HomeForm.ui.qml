@@ -5,8 +5,6 @@ Page {
     id: page
     width: 600
     height: 400
-    property alias model: listView.model
-    property alias button: button
 
     title: qsTr("Home")
 
@@ -31,75 +29,6 @@ Page {
         anchors.top: image.bottom
         anchors.topMargin: 0
 
-        Button {
-            id: button
-            x: 206
-            text: qsTr("Add Workout")
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            anchors.top: parent.top
-            anchors.topMargin: 0
-            font.pointSize: 7
-            font.wordSpacing: -0.2
-            topPadding: 5
-        }
-
-        ListView {
-            id: listView
-            y: 0
-            height: 160
-            anchors.right: button.left
-            anchors.rightMargin: 4
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
-            anchors.top: parent.top
-            anchors.topMargin: 0
-            z: 2
-            clip: true
-            model: ListModel {
-                ListElement {
-                    name: "Grey"
-                    colorCode: "grey"
-                }
-
-                ListElement {
-                    name: "Red"
-                    colorCode: "red"
-                }
-
-                ListElement {
-                    name: "Blue"
-                    colorCode: "blue"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-            }
-            delegate: Item {
-                x: 5
-                width: 80
-                height: 40
-                Row {
-                    id: row1
-                    Rectangle {
-                        width: 40
-                        height: 40
-                        color: colorCode
-                    }
-
-                    Text {
-                        text: name
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.bold: true
-                    }
-                    spacing: 10
-                }
-            }
-        }
     }
 
     Image {
@@ -123,6 +52,6 @@ Page {
 
 
 /*##^## Designer {
-    D{i:3;anchors_y:0}D{i:4;anchors_width:110;anchors_x:0}D{i:2;anchors_y:188}
+    D{i:4;anchors_width:110;anchors_x:0}D{i:3;anchors_y:0}D{i:2;anchors_y:188}
 }
  ##^##*/

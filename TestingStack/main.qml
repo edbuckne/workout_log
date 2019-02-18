@@ -27,6 +27,7 @@ ApplicationWindow {
         Label {
             text: stackView.currentItem.title
             anchors.centerIn: parent
+
         }
     }
 
@@ -39,7 +40,7 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Page 1")
+                text: qsTr("Exercises")
                 width: parent.width
                 onClicked: {
                     stackView.push(idPage1Form)
@@ -65,15 +66,20 @@ ApplicationWindow {
 
         HomeForm{
             id: idHomeForm
-            button.onClicked: stackView.push(idPage1Form)
         }
         Page1Form{
             id: idPage1Form
             visible: false
             button.onClicked:{
-
-                idHomeForm.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Blue"})
-                stackView.pop()
+                if(idPage1Form.comboBox.currentIndex===0){
+                    idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Blue"})
+                }
+                if(idPage1Form.comboBox.currentIndex===1){
+                    idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Green"})
+                }
+                if(idPage1Form.comboBox.currentIndex===2){
+                    idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Red"})
+                }
             }
         }
     }

@@ -9,7 +9,6 @@ Page {
     property alias model: listView.model
     property string exerciseName: ""
     property alias comboBox: comboBox
-    //property alias eType:
 
     title: qsTr("Exercises")
 
