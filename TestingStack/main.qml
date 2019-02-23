@@ -50,7 +50,7 @@ ApplicationWindow {
                 text: qsTr("Workouts")
                 width: parent.width
                 onClicked: {
-                    stackView.push("Page2Form.ui.qml")
+                    stackView.push(workoutPage)
                     drawer.close()
                 }
             }
@@ -68,6 +68,11 @@ ApplicationWindow {
 
         ExercisePage{ // This is the exercise Page
             id: exercisePage
+            visible: false
+        }
+
+        WorkoutPage{
+            id: workoutPage
             visible: false
         }
     }

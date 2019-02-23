@@ -8,5 +8,7 @@
         <file>TheWorkout.jpg</file>
         <file>ExercisePage.qml</file>
         <file>ExercisePageForm.ui.qml</file>
+        <file>WorkoutPage.qml</file>
+        <file>WorkoutPageForm.ui.qml</file>
     </qresource>
 </RCC>
