@@ -8,10 +8,10 @@ ApplicationWindow {
     height: 480
     title: qsTr("Stack")
 
-    header: ToolBar {
+    header: ToolBar { // Top bar of the window
         contentHeight: toolButton.implicitHeight
 
-        ToolButton {
+        ToolButton { // Top left three-stripped icon or back icon depending on how big the stack is
             id: toolButton
             text: stackView.depth > 1 ? "\u25C0" : "\u2630"
             font.pixelSize: Qt.application.font.pixelSize * 1.6
@@ -24,31 +24,30 @@ ApplicationWindow {
             }
         }
 
-        Label {
+        Label { // Shows the name of the current page on top in the center
             text: stackView.currentItem.title
             anchors.centerIn: parent
-
         }
     }
 
-    Drawer {
+    Drawer { // Option window that opens when the toolButton is opened
         id: drawer
         width: window.width * 0.66
         height: window.height
 
-        Column {
+        Column { // A column of options
             anchors.fill: parent
 
-            ItemDelegate {
+            ItemDelegate { // Exercises tab
                 text: qsTr("Exercises")
                 width: parent.width
                 onClicked: {
-                    stackView.push(idPage1Form)
+                    stackView.push(exercisePage)
                     drawer.close()
                 }
             }
-            ItemDelegate {
-                text: qsTr("Page 2")
+            ItemDelegate { // Workouts tab
+                text: qsTr("Workouts")
                 width: parent.width
                 onClicked: {
                     stackView.push("Page2Form.ui.qml")
@@ -58,46 +57,18 @@ ApplicationWindow {
         }
     }
 
-
-    StackView {
+    StackView { // Module that opens new windows from given signals
         id: stackView
         initialItem: idHomeForm
         anchors.fill: parent
 
-        HomeForm{
+        HomeForm{ // The home page
             id: idHomeForm
         }
 
-        Page1Form{
-            id: idPage1Form
+        ExercisePage{ // This is the exercise Page
+            id: exercisePage
             visible: false
-            mouseClick.onClicked: { // Clear the text when the area is clicked
-                textInput.selectAll()
-                textInput.forceActiveFocus()
-            }
-            mouseClick1.onClicked: {
-                textInput1.selectAll()
-                textInput1.forceActiveFocus()
-            }
-            mouseClick2.onClicked: {
-                textInput2.selectAll()
-                textInput2.forceActiveFocus()
-            }
-            button.onClicked:{ // When the "Create exercise" button is clicked, add an element to the list according to color
-                if(idPage1Form.comboBox.currentIndex===0){
-                    idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Blue"})
-                }
-                if(idPage1Form.comboBox.currentIndex===1){
-                    idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Green"})
-                }
-                if(idPage1Form.comboBox.currentIndex===2){
-                    idPage1Form.model.append({ "name": idPage1Form.exerciseName, "colorCode" : "Red"})
-                }
-                comboBox.currentIndex = 0 // Set values back to default
-                textInput.text = "Enter here"
-                textInput1.text = "Enter here"
-                textInput2.text = "Enter here"
-            }
         }
     }
 }

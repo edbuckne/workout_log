@@ -6,5 +6,7 @@
         <file>Page2Form.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>TheWorkout.jpg</file>
+        <file>ExercisePage.qml</file>
+        <file>ExercisePageForm.ui.qml</file>
     </qresource>
 </RCC>

@@ -42,16 +42,4 @@ Page {
         source: "qrc:///TheWorkout.jpg"
     }
 
-    Connections {
-        target: button
-        onClicked: print("clicked")
-    }
 }
-
-
-
-
-/*##^## Designer {
-    D{i:4;anchors_width:110;anchors_x:0}D{i:3;anchors_y:0}D{i:2;anchors_y:188}
-}
- ##^##*/

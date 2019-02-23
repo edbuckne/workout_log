@@ -21,48 +21,6 @@ Page {
 
     title: qsTr("Exercises")
 
-    ListView {
-        // List of existing exercises
-        id: listView
-        y: 0
-        height: 160
-        anchors.right: parent.right
-        anchors.rightMargin: 10
-        anchors.left: parent.left
-        anchors.leftMargin: 320
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.top: parent.top
-        anchors.topMargin: 50
-        z: 2
-        clip: true
-        model: ListModel {
-            id: listModel
-        }
-        delegate: Item {
-            x: 5
-            width: 80
-            height: 40
-            Row {
-                id: row1
-
-                Rectangle {
-                    width: 40
-                    height: 40
-                    color: colorCode
-                }
-
-                Text {
-                    text: name
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.bold: true
-                }
-
-                spacing: 10
-            }
-        }
-    }
-
     ScrollView {
         id: scrollView
         anchors.bottom: parent.bottom
@@ -251,6 +209,48 @@ Page {
         }
     }
 
+    ListView {
+        // List of existing exercises
+        id: listView
+        y: 0
+        height: 160
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.left: parent.left
+        anchors.leftMargin: 320
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.top: parent.top
+        anchors.topMargin: 50
+        z: 2
+        clip: true
+        model: ListModel {
+            id: listModel
+        }
+        delegate: Item {
+            x: 5
+            width: 80
+            height: 40
+            Row {
+                id: row1
+
+                Rectangle {
+                    width: 40
+                    height: 40
+                    color: colorCode
+                }
+
+                Text {
+                    text: name
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.bold: true
+                }
+
+                spacing: 10
+            }
+        }
+    }
+
     Rectangle {
         id: rectangle4
         x: 320
@@ -274,27 +274,4 @@ Page {
             font.pixelSize: 12
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-/*##^## Designer {
-    D{i:5;anchors_height:20;anchors_width:80;anchors_x:60;anchors_y:12}D{i:6;anchors_width:304;anchors_x:286}
-D{i:1;anchors_width:306}D{i:9;anchors_width:203;anchors_x:96}D{i:10;anchors_width:304;anchors_x:286}
-D{i:8;anchors_width:203;anchors_x:96}D{i:11;anchors_width:304;anchors_x:286}D{i:12;anchors_width:203;anchors_x:96}
-D{i:13;anchors_width:203;anchors_x:0}D{i:14;anchors_width:203;anchors_x:14}D{i:16;anchors_width:202;anchors_x:98}
-D{i:15;anchors_width:202;anchors_x:98;anchors_y:11}D{i:18;anchors_width:275;anchors_x:35}
-D{i:19;anchors_width:275;anchors_x:35}D{i:17;anchors_width:203;anchors_x:293}D{i:20;anchors_width:203;anchors_x:96}
-D{i:21;anchors_width:203;anchors_x:0}D{i:23;anchors_width:203;anchors_x:293}D{i:24;anchors_width:203;anchors_x:96;anchors_y:0}
-D{i:22;anchors_width:203;anchors_x:293}D{i:7;anchors_height:400;anchors_width:304;anchors_x:286;anchors_y:0}
-D{i:26;anchors_width:203;anchors_x:96;anchors_y:0}D{i:25;anchors_width:269;anchors_x:5;anchors_y:-35}
-}
- ##^##*/
