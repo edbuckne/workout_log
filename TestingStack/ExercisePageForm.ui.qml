@@ -31,7 +31,40 @@ Page {
         anchors.right: parent.right
         anchors.rightMargin: 320
 
-        Rectangle {
+        Rectangle { // Header block that says Create New Exercise
+            id: rectangle1
+            height: 30
+            color: "#aac57f" // Greenish
+            anchors.top: parent.top
+            anchors.topMargin: 10
+            border.width: 2
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+
+            Text {
+                id: element2
+                x: 144
+                y: 8
+                text: qsTr("Create New Exercise")
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: 12
+            }
+        }
+
+        Text { // Exercise Name text
+            id: element
+            x: 13
+            y: 56
+            height: 15
+            text: qsTr("Exercise Name")
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            font.pixelSize: 12
+        }
+
+        Rectangle { // Exercise Name input block
             id: rectangle
             y: 47
             height: 30
@@ -52,7 +85,6 @@ Page {
                 y: 0
                 width: 62
                 height: 14
-                //text: qsTr("Enter here")
                 text: "Enter here"
                 anchors.verticalCenterOffset: 0
                 anchors.left: parent.left
@@ -63,7 +95,7 @@ Page {
             }
         }
 
-        Text {
+        Text { // Text that says Exercise Type
             id: element1
             y: 96
             text: qsTr("Exercise Type")
@@ -72,7 +104,7 @@ Page {
             font.pixelSize: 12
         }
 
-        ComboBox {
+        ComboBox { // Allows the user to pick, from a list, the type of exercise
             id: comboBox
             y: 88
             height: 30
@@ -83,51 +115,18 @@ Page {
             model: ["Strength", "Duration", "Agility"]
         }
 
-        Button {
-            id: button
-            x: -36
-            y: 340
-            width: 100
-            height: 28
-            text: qsTr("Create Exercise")
-            anchors.horizontalCenterOffset: 0
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Text {
-            id: element
-            x: 13
-            y: 56
+        Text { // Text that says weight type
+            id: element3
+            x: 8
+            y: 137
             height: 15
-            text: qsTr("Exercise Name")
+            text: qsTr("Weight Type")
+            font.pixelSize: 12
             anchors.left: parent.left
             anchors.leftMargin: 5
-            font.pixelSize: 12
         }
 
-        Rectangle {
-            id: rectangle1
-            height: 30
-            color: "#aac57f"
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            border.width: 2
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-
-            Text {
-                id: element2
-                x: 144
-                y: 8
-                text: qsTr("Create New Exercise")
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 12
-            }
-        }
-
-        Rectangle {
+        Rectangle { // Weight type input block
             id: rectangle2
             x: -2
             y: 129
@@ -156,18 +155,7 @@ Page {
             anchors.leftMargin: 100
         }
 
-        Text {
-            id: element3
-            x: 8
-            y: 137
-            height: 15
-            text: qsTr("Weight Type")
-            font.pixelSize: 12
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-        }
-
-        Text {
+        Text { // Text that says Description (Optional)
             id: element4
             x: 16
             y: 182
@@ -178,7 +166,7 @@ Page {
             anchors.leftMargin: 5
         }
 
-        Rectangle {
+        Rectangle { // Description input block
             id: rectangle3
             x: 3
             y: 203
@@ -205,6 +193,41 @@ Page {
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.leftMargin: 5
+        }
+
+        Button { // Button to press when finished filling out information
+            id: button
+            x: -36
+            y: 340
+            width: 100
+            height: 28
+            text: qsTr("Create Exercise")
+            anchors.horizontalCenterOffset: 0
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+
+    Rectangle { // List of exercises header block
+        id: rectangle4
+        x: 320
+        y: 10
+        height: 30
+        color: "#aac57f"
+        border.width: 2
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 320
+
+        Text {
+            id: element5
+            x: 123
+            y: 8
+            text: qsTr("List of Exercises")
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 12
         }
     }
 
@@ -250,27 +273,4 @@ Page {
         }
     }
 
-    Rectangle {
-        id: rectangle4
-        x: 320
-        y: 10
-        height: 30
-        color: "#aac57f"
-        border.width: 2
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 320
-
-        Text {
-            id: element5
-            x: 123
-            y: 8
-            text: qsTr("List of Exercises")
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 12
-        }
-    }
 }
