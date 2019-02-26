@@ -5,15 +5,14 @@ Page {
     id: idPage
     width: 640
     height: 480
+    property alias descriptionInput: descriptionInput
+    property alias weightTypeInput: weightTypeInput
+    property alias exerciseNameInput: exerciseNameInput
 
     property alias button: button
-    property alias model: listView.model
+    property alias listModel: listView.model
     property string exerciseName: ""
     property alias comboBox: comboBox
-
-    property alias textInput: textInput
-    property alias textInput1: textInput1
-    property alias textInput2: textInput2
 
     property alias mouseClick: mouseClick
     property alias mouseClick1: mouseClick1
@@ -49,7 +48,7 @@ Page {
             }
 
             TextInput {
-                id: textInput
+                id: exerciseNameInput
                 y: 0
                 width: 62
                 height: 14
@@ -141,7 +140,7 @@ Page {
             }
 
             TextInput {
-                id: textInput1
+                id: weightTypeInput
                 y: 0
                 text: qsTr("Enter here")
                 font.pixelSize: 12
@@ -192,7 +191,7 @@ Page {
             }
 
             TextInput {
-                id: textInput2
+                id: descriptionInput
                 text: qsTr("Enter here")
                 anchors.top: parent.top
                 anchors.topMargin: 5
@@ -237,7 +236,7 @@ Page {
                 Rectangle {
                     width: 40
                     height: 40
-                    color: colorCode
+                    color: exercise_type
                 }
 
                 Text {

@@ -1,5 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.LocalStorage 2.0
+import "Database.js" as JS
 
 ApplicationWindow {
     id: window
@@ -70,5 +72,9 @@ ApplicationWindow {
             id: exercisePage
             visible: false
         }
+    }
+
+    Component.onCompleted: {
+        JS.dbInit()
     }
 }
