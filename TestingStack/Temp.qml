@@ -18,9 +18,7 @@ Page {
     property alias mouseClick1: mouseClick1
     property alias mouseClick2: mouseClick2
 
-    property alias delegateClick: delegateClick
-
-    title: qsTr("Exercise")
+    title: qsTr("Exercises")
 
     ScrollView {
         id: scrollView
@@ -292,10 +290,13 @@ Page {
 
                 spacing: 10
             }
-        }
-        MouseArea {
-            id: delegateClick
-            anchors.fill: parent
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    listView.currentIndex = index
+                    stackView.push(exerciseSingle)
+                }
+            }
         }
     }
 }

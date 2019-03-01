@@ -68,13 +68,17 @@ ApplicationWindow {
             id: idHomeForm
         }
 
-        ExercisePage{ // This is the exercise Page
+        ExercisePage_02{ // This is the exercise Page
             id: exercisePage
             visible: false
         }
 
         WorkoutPage{
             id: workoutPage
+            visible: false
+        }
+        ExerciseSingle{
+            id: exerciseSingle
             visible: false
         }
     }

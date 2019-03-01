@@ -1,26 +1,15 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import QtQuick.LocalStorage 2.0
+import "Database.js" as JS
 
 Page {
     id: idPage
     width: 640
     height: 480
-    property alias descriptionInput: descriptionInput
-    property alias weightTypeInput: weightTypeInput
-    property alias exerciseNameInput: exerciseNameInput
-
-    property alias button: button
-    property alias listModel: listView.model
-    property string exerciseName: ""
-    property alias comboBox: comboBox
-
-    property alias mouseClick: mouseClick
-    property alias mouseClick1: mouseClick1
-    property alias mouseClick2: mouseClick2
-
-    property alias delegateClick: delegateClick
-
     title: qsTr("Exercise")
+
+    property alias listModelExercises: listModel
 
     ScrollView {
         id: scrollView
@@ -80,11 +69,6 @@ Page {
             anchors.rightMargin: 5
             border.color: "#524d4d"
 
-            MouseArea {
-                id: mouseClick
-                anchors.fill: parent
-            }
-
             TextInput {
                 id: exerciseNameInput
                 y: 0
@@ -96,7 +80,15 @@ Page {
                 anchors.leftMargin: 5
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 12
-                onEditingFinished: idPage.exerciseName = text
+            }
+
+            MouseArea {
+                id: mouseClick
+                anchors.fill: parent
+                onClicked: { // Clear the text when the area is clicked
+                    exerciseNameInput.selectAll()
+                    exerciseNameInput.forceActiveFocus()
+                }
             }
         }
 
@@ -141,11 +133,11 @@ Page {
             y: 129
             height: 30
             color: "#ffffff"
-
-            MouseArea {
-                id: mouseClick1
-                anchors.fill: parent
-            }
+            anchors.rightMargin: 5
+            border.color: "#524d4d"
+            anchors.right: parent.right
+            anchors.left: parent.left
+            anchors.leftMargin: 100
 
             TextInput {
                 id: weightTypeInput
@@ -157,11 +149,14 @@ Page {
                 anchors.leftMargin: 5
             }
 
-            anchors.rightMargin: 5
-            border.color: "#524d4d"
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.leftMargin: 100
+            MouseArea {
+                id: mouseClick1
+                anchors.fill: parent
+                onClicked: {
+                    weightTypeInput.selectAll()
+                    weightTypeInput.forceActiveFocus()
+                }
+            }
         }
 
         Text {
@@ -183,11 +178,11 @@ Page {
             y: 203
             height: 131
             color: "#ffffff"
-
-            MouseArea {
-                anchors.fill: parent
-                id: mouseClick2
-            }
+            anchors.rightMargin: 5
+            border.color: "#524d4d"
+            anchors.right: parent.right
+            anchors.left: parent.left
+            anchors.leftMargin: 5
 
             TextInput {
                 id: descriptionInput
@@ -199,11 +194,14 @@ Page {
                 anchors.leftMargin: 5
             }
 
-            anchors.rightMargin: 5
-            border.color: "#524d4d"
-            anchors.right: parent.right
-            anchors.left: parent.left
-            anchors.leftMargin: 5
+            MouseArea {
+                id: mouseClick2
+                anchors.fill: parent
+                onClicked: {
+                    descriptionInput.selectAll()
+                    descriptionInput.forceActiveFocus()
+                }
+            }
         }
 
         Button {
@@ -216,6 +214,29 @@ Page {
             text: qsTr("Create Exercise")
             anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
+            onClicked:{ // When the "Create exercise" button is clicked, add an element to the list according to color
+                var rowid = listModel.count + 1
+                if(comboBox.currentIndex===0){
+                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Blue", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
+                    listModel.append({ "exerciseId": rowid, "name": exerciseNameInput.text, "exercise_type" : "Blue", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
+
+                }
+                else if(comboBox.currentIndex===1){
+                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Green", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
+                    listModel.append({ "exerciseId": rowid, "name": exerciseNameInput.text, "exercise_type" : "Green", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
+
+                }
+                else if(comboBox.currentIndex===2){
+                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Red", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
+                    listModel.append({ "exerciseId": rowid, "name": exerciseNameInput.text, "exercise_type" : "Red", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
+
+                }
+
+                comboBox.currentIndex = 0 // Set values back to default
+                exerciseNameInput.text = "Enter here"
+                weightTypeInput.text = "Enter here"
+                descriptionInput.text = "Enter here"
+            }
         }
     }
 
@@ -254,20 +275,13 @@ Page {
         anchors.left: parent.left
         anchors.leftMargin: 320
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
+        anchors.bottomMargin: 20
         anchors.top: parent.top
         anchors.topMargin: 50
         z: 2
         clip: true
         model: ListModel {
             id: listModel
-            ListElement {
-                exerciseId: 1
-                name: "Test"
-                exercise_type: "Blue"
-                weight_type: "BB"
-                description: "blah"
-            }
         }
         delegate: Item {
             x: 5
@@ -282,10 +296,26 @@ Page {
                     width: 40
                     height: 40
                     color: exercise_type
+
+                    MouseArea { // What happens when we click an exercise on the list
+                        id: delegateClick
+                        anchors.fill: parent
+                        onClicked: {
+                            exerciseSingle.indexNum = index
+                            exerciseSingle.exName = listModel.get(index).name
+                            exerciseSingle.wtType = listModel.get(index).weight_type
+                            exerciseSingle.exType = listModel.get(index).exercise_type
+                            exerciseSingle.des = listModel.get(index).description
+                            //exerciseSingle.rowid = listModel.get(index).id
+                            exerciseSingle.rowid = listModel.get(index).id
+                            console.log(listModel.get(index).id)
+                            stackView.push(exerciseSingle)
+                        }
+                    }
                 }
 
                 Text {
-                    text: name
+                    text: name + " (" + weight_type + ")"
                     anchors.verticalCenter: parent.verticalCenter
                     font.bold: true
                 }
@@ -293,14 +323,7 @@ Page {
                 spacing: 10
             }
         }
-        MouseArea {
-            id: delegateClick
-            anchors.fill: parent
-        }
     }
-}
 
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
+    Component.onCompleted: JS.dbReadAll(listModel) // When the ExercisePage has been instantiated, dbRealAll gets called
 }
- ##^##*/

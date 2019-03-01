@@ -60,6 +60,9 @@ function dbInit()
     };
 }
 
+/* dbGetHandle is a function that takes in no inputs. It opens an sql database called 
+   Workout_Log_DB with the display name of Track exercise. The returned value is the 
+   database object.*/
 function dbGetHandle()
 {
     try {
@@ -71,10 +74,13 @@ function dbGetHandle()
     return db
 }
 
+/* dbInsert is a function that takes in the name of the exercise (string), the color that the
+   block will be (string), the type of weight used in this exercise (string), the discription 
+   of the exercise (string), and the size of the current list of exercises (int).*/
 function dbInsert(Pname, Pexercisetype, PweightType, Pdesc, Prowid)
 {
-    var db = dbGetHandle()
-    var rowid = 0;
+    var db = dbGetHandle() // Load the database into the variable db
+    var rowid = 0; // rowid is used to reference the row index
     db.transaction(function (tx) {
         var result = tx.executeSql('SELECT last_insert_rowid()')
         rowid = result.insertId + 1
@@ -84,14 +90,16 @@ function dbInsert(Pname, Pexercisetype, PweightType, Pdesc, Prowid)
     return rowid;
 }
 
-function dbReadAll()
+/* dbReadAll is a function that takes in no inputs. It loads the database and appends every 
+   instance of an iten on the list model on the ExercisePage. It returns nothing.*/
+function dbReadAll(modIn)
 {
-    var db = dbGetHandle()
-    db.transaction(function (tx) {
-        var results = tx.executeSql(
-                    'SELECT name, exercise_type, weight_type, description FROM exercise_log order by rowid desc')
+    var db = dbGetHandle() // Load the database into the variable db
+    db.transaction(function (tx) { // db.transaction is a transaction of data from js to sql
+        var results = tx.executeSql( // Executes the query in the follow line of code for sql
+                    'SELECT name, exercise_type, weight_type, description, rowid FROM exercise_log ORDER BY rowid DESC')
         for (var i = 0; i < results.rows.length; i++) {
-            listModel.append({
+            modIn.append({
                                  id: results.rows.item(i).rowid,
                                  name: results.rows.item(i).name,
                                  exercise_type: results.rows.item(i).exercise_type,
@@ -107,7 +115,7 @@ function dbUpdate(Pname, PexerciseType, PweightType, Pdesc, Prowid)
     var db = dbGetHandle()
     db.transaction(function (tx) {
         tx.executeSql(
-                    'update exercise_log set name=?, exercise_type=?, weight_type=?, description=? where rowid = ?', [Pname, PexerciseType, PweightType, Pdesc, Prowid])
+                    'UPDATE exercise_log SET name=?, exercise_type=?, weight_type=?, description=? WHERE rowid = ?', [Pname, PexerciseType, PweightType, Pdesc, Prowid])
     })
 }
 
@@ -115,6 +123,6 @@ function dbDeleteRow(Prowid)
 {
     var db = dbGetHandle()
     db.transaction(function (tx) {
-        tx.executeSql('delete from trip_log where rowid = ?', [Prowid])
+        tx.executeSql('delete from exercise_log where rowid = ?', [Prowid])
     })
 }

@@ -18,9 +18,7 @@ Page {
     property alias mouseClick1: mouseClick1
     property alias mouseClick2: mouseClick2
 
-    property alias delegateClick: delegateClick
-
-    title: qsTr("Exercise")
+    title: qsTr("Exercises")
 
     ScrollView {
         id: scrollView
@@ -294,7 +292,6 @@ Page {
             }
         }
         MouseArea {
-            id: delegateClick
             anchors.fill: parent
         }
     }

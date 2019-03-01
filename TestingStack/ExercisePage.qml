@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.LocalStorage 2.0
 import "Database.js" as JS
 
-ExercisePageForm {
+Temp {
     id: exercisePageForm
     mouseClick.onClicked: { // Clear the text when the area is clicked
         exerciseNameInput.selectAll()
@@ -19,7 +19,7 @@ ExercisePageForm {
     button.onClicked:{ // When the "Create exercise" button is clicked, add an element to the list according to color
         var rowid
         if(comboBox.currentIndex===0){
-             rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Blue", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
+            rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Blue", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
             listModel.append({ "exerciseId": rowid, "name": exerciseNameInput.text, "exercise_type" : "Blue", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
 
         }
@@ -39,6 +39,7 @@ ExercisePageForm {
         weightTypeInput.text = "Enter here"
         descriptionInput.text = "Enter here"
     }
-    Component.onCompleted: JS.dbReadAll()
+
+    Component.onCompleted: JS.dbReadAll() // When the ExercisePage has been instantiated, dbRealAll gets called
 }
 
