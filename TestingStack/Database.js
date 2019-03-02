@@ -53,7 +53,7 @@ function dbInit()
     var db = LocalStorage.openDatabaseSync("Workout_Log_DB", "", "Track exercise", 1000000)
     try {
         db.transaction(function (tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS exercise_log (name text, exercise_type text, weight_type text, description text, rowid integer)')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS exercise_log (name text, exercise_type text, weight_type text, description text)')
         })
     } catch (err) {
         console.log("Error creating table in database: " + err)
@@ -77,15 +77,15 @@ function dbGetHandle()
 /* dbInsert is a function that takes in the name of the exercise (string), the color that the
    block will be (string), the type of weight used in this exercise (string), the discription 
    of the exercise (string), and the size of the current list of exercises (int).*/
-function dbInsert(Pname, Pexercisetype, PweightType, Pdesc, Prowid)
+function dbInsert(Pname, Pexercisetype, PweightType, Pdesc)
 {
     var db = dbGetHandle() // Load the database into the variable db
     var rowid = 0; // rowid is used to reference the row index
     db.transaction(function (tx) {
+        tx.executeSql('INSERT INTO exercise_log VALUES(?, ?, ?, ?)',
+                      [Pname, Pexercisetype, PweightType, Pdesc])
         var result = tx.executeSql('SELECT last_insert_rowid()')
-        rowid = result.insertId + 1
-        tx.executeSql('INSERT INTO exercise_log VALUES(?, ?, ?, ?, ?)',
-                      [Pname, Pexercisetype, PweightType, Pdesc, rowid])
+        rowid = result.insertId
     })
     return rowid;
 }

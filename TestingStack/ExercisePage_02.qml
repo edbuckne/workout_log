@@ -215,20 +215,20 @@ Page {
             anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked:{ // When the "Create exercise" button is clicked, add an element to the list according to color
-                var rowid = listModel.count + 1
+                var rowid
                 if(comboBox.currentIndex===0){
-                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Blue", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
-                    listModel.append({ "exerciseId": rowid, "name": exerciseNameInput.text, "exercise_type" : "Blue", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
+                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Blue", weightTypeInput.text, descriptionInput.text), 10)
+                    listModel.append({ "id": rowid, "name": exerciseNameInput.text, "exercise_type" : "Blue", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
 
                 }
                 else if(comboBox.currentIndex===1){
-                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Green", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
-                    listModel.append({ "exerciseId": rowid, "name": exerciseNameInput.text, "exercise_type" : "Green", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
+                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Green", weightTypeInput.text, descriptionInput.text), 10)
+                    listModel.append({ "id": rowid, "name": exerciseNameInput.text, "exercise_type" : "Green", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
 
                 }
                 else if(comboBox.currentIndex===2){
-                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Red", weightTypeInput.text, descriptionInput.text, listModel.count), 10)
-                    listModel.append({ "exerciseId": rowid, "name": exerciseNameInput.text, "exercise_type" : "Red", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
+                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Red", weightTypeInput.text, descriptionInput.text), 10)
+                    listModel.append({ "id": rowid, "name": exerciseNameInput.text, "exercise_type" : "Red", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
 
                 }
 
