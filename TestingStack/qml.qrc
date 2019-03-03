@@ -13,5 +13,7 @@
         <file>ExerciseSingleForm.ui.qml</file>
         <file>Temp.qml</file>
         <file>ExercisePage_02.qml</file>
+        <file>WorkoutPage_02.qml</file>
+        <file>ItemListDelegate.qml</file>
     </qresource>
 </RCC>

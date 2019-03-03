@@ -73,7 +73,7 @@ ApplicationWindow {
             visible: false
         }
 
-        WorkoutPage{
+        WorkoutPage_02{
             id: workoutPage
             visible: false
         }

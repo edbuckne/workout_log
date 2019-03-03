@@ -72,12 +72,12 @@ Page {
             TextInput {
                 id: exerciseNameInput
                 y: 0
-                width: 62
                 height: 14
                 text: "Enter here"
                 anchors.verticalCenterOffset: 0
                 anchors.left: parent.left
                 anchors.leftMargin: 5
+                anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 12
             }
@@ -283,44 +283,18 @@ Page {
         model: ListModel {
             id: listModel
         }
-        delegate: Item {
-            x: 5
-            width: 80
-            height: 40
-
-            Row {
-                id: row1
-
-                Rectangle {
-                    id: colorSquare
-                    width: 40
-                    height: 40
-                    color: exercise_type
-
-                    MouseArea { // What happens when we click an exercise on the list
-                        id: delegateClick
-                        anchors.fill: parent
-                        onClicked: {
-                            exerciseSingle.indexNum = index
-                            exerciseSingle.exName = listModel.get(index).name
-                            exerciseSingle.wtType = listModel.get(index).weight_type
-                            exerciseSingle.exType = listModel.get(index).exercise_type
-                            exerciseSingle.des = listModel.get(index).description
-                            //exerciseSingle.rowid = listModel.get(index).id
-                            exerciseSingle.rowid = listModel.get(index).id
-                            console.log(listModel.get(index).id)
-                            stackView.push(exerciseSingle)
-                        }
-                    }
-                }
-
-                Text {
-                    text: name + " (" + weight_type + ")"
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.bold: true
-                }
-
-                spacing: 10
+        delegate: ItemListDelegate { // This is a custom component to describe what the components in our lists look like
+            boxColor: exercise_type
+            itemText: name + " (" + weight_type + ")"
+            boxClick.onClicked: {
+                exerciseSingle.indexNum = index
+                exerciseSingle.exName = listModel.get(index).name
+                exerciseSingle.wtType = listModel.get(index).weight_type
+                exerciseSingle.exType = listModel.get(index).exercise_type
+                exerciseSingle.des = listModel.get(index).description
+                exerciseSingle.rowid = listModel.get(index).id
+                console.log(listModel.get(index).id)
+                stackView.push(exerciseSingle)
             }
         }
     }
