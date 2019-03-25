@@ -10,6 +10,9 @@ Page {
     height: 480
     title: "Workouts"
 
+    property alias listOfExercises: listOfExercises
+    property alias workoutListModel: workoutListModel
+
     ScrollView { // Block to create a new workout
         id: scrollView
         y: 0
@@ -96,8 +99,20 @@ Page {
             text: qsTr("Create Workout")
             anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                workoutListModel.append({"name":workoutInput.text})
+            onClicked: { // This click will note all workouts that have been selected, put them in an array, and connect those to this specified workout
+                var exList = []
+                var count = listOfExercises.count
+                console.log(count)
+                for (var i = 0; i < count; i++){
+                    if (listOfExercises.get(i).checked){
+                        exList.push(listOfExercises.get(i).id)
+                        console.log(listOfExercises.get(i).name)
+                    }
+                }
+                console.log(exList)
+                var wo_id = JS.dbInsertWorkout(workoutInput.text) // Put workout into the database
+                JS.linkWorkoutsExercises(wo_id, exList)
+                workoutListModel.append({"name":workoutInput.text, "id":wo_id}) // Put the workout into the app list
             }
         }
 
@@ -142,12 +157,17 @@ Page {
                 boxClick.onClicked: {
                     if(boxColor == "#ffffff"){
                         boxColor = exercise_type
+                        listOfExercises.setProperty(index, "checked", false)
                     }
                     else {
                         boxColor = "#ffffff"
+                        listOfExercises.setProperty(index, "checked", true)
                     }
                 }
             }
+//            delegate: CheckboxDelegate {
+//                itemText: name + " (" + weight_type + ") - " + exercise_type
+//            }
         }
     }
 
@@ -196,9 +216,27 @@ Page {
         delegate: ItemListDelegate {
             boxColor: "#f1f1f1"
             itemText: name
+            boxClick.onClicked: {
+                console.log(workoutListModel.get(index).name)
+                var exList = JS.readWorkouts(workoutListModel.get(index).id)
+                var exListIds = []
+                for (var i = 0; i < exList.length; i++){
+                    exListIds.push(exList[i].rows.item(0).id)
+                }
+
+                JS.dbReadAll(workoutSingle.exerciseList, exListIds)
+
+                workoutSingle.woName = workoutListModel.get(index).name
+                workoutSingle.id = workoutListModel.get(index).id
+                stackView.push(workoutSingle)
+            }
         }
     }
 
-    Component.onCompleted: JS.dbReadAll(listOfExercises) // When the ExercisePage has been instantiated, dbRealAll gets called
+//    Component.onCompleted: {
+//        JS.dbReadAll(listOfExercises) // When the ExercisePage has been instantiated, dbRealAll gets called
+//        JS.dbReadAllWorkouts(workoutListModel) // It also gets all of the existing workouts
+//    }
+
 
 }

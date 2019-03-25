@@ -44,6 +44,8 @@ ApplicationWindow {
                 text: qsTr("Exercises")
                 width: parent.width
                 onClicked: {
+                    exercisePage.listModelExercises.clear()
+                    JS.dbReadAll(exercisePage.listModelExercises, -1)
                     stackView.push(exercisePage)
                     drawer.close()
                 }
@@ -52,8 +54,13 @@ ApplicationWindow {
                 text: qsTr("Workouts")
                 width: parent.width
                 onClicked: {
-                    stackView.push(workoutPage)
-                    drawer.close()
+                    workoutPage.listOfExercises.clear() // Clear the two lists and repopulate occordingly
+                    JS.dbReadAll(workoutPage.listOfExercises, -1)
+                    workoutPage.workoutListModel.clear()
+                    JS.dbReadAllWorkouts(workoutPage.workoutListModel)
+
+                    stackView.push(workoutPage) // Pull up the workout page
+                    drawer.close() // Close the drawer that comes out for these options
                 }
             }
         }
@@ -77,8 +84,14 @@ ApplicationWindow {
             id: workoutPage
             visible: false
         }
+
         ExerciseSingle{
             id: exerciseSingle
+            visible: false
+        }
+
+        WorkoutSingle{
+            id: workoutSingle
             visible: false
         }
     }

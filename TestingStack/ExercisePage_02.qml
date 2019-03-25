@@ -217,17 +217,17 @@ Page {
             onClicked:{ // When the "Create exercise" button is clicked, add an element to the list according to color
                 var rowid
                 if(comboBox.currentIndex===0){
-                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Blue", weightTypeInput.text, descriptionInput.text), 10)
+                    rowid = parseInt(JS.dbInsertExercise(exerciseNameInput.text, "Blue", weightTypeInput.text, descriptionInput.text), 10)
                     listModel.append({ "id": rowid, "name": exerciseNameInput.text, "exercise_type" : "Blue", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
 
                 }
                 else if(comboBox.currentIndex===1){
-                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Green", weightTypeInput.text, descriptionInput.text), 10)
+                    rowid = parseInt(JS.dbInsertExercise(exerciseNameInput.text, "Green", weightTypeInput.text, descriptionInput.text), 10)
                     listModel.append({ "id": rowid, "name": exerciseNameInput.text, "exercise_type" : "Green", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
 
                 }
                 else if(comboBox.currentIndex===2){
-                    rowid = parseInt(JS.dbInsert(exerciseNameInput.text, "Red", weightTypeInput.text, descriptionInput.text), 10)
+                    rowid = parseInt(JS.dbInsertExercise(exerciseNameInput.text, "Red", weightTypeInput.text, descriptionInput.text), 10)
                     listModel.append({ "id": rowid, "name": exerciseNameInput.text, "exercise_type" : "Red", "weight_type": weightTypeInput.text, "description": descriptionInput.text})
 
                 }
@@ -299,5 +299,5 @@ Page {
         }
     }
 
-    Component.onCompleted: JS.dbReadAll(listModel) // When the ExercisePage has been instantiated, dbRealAll gets called
+    // Component.onCompleted: JS.dbReadAll(listModel, -1) // When the ExercisePage has been instantiated, dbRealAll gets called
 }

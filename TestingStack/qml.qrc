@@ -15,5 +15,8 @@
         <file>ExercisePage_02.qml</file>
         <file>WorkoutPage_02.qml</file>
         <file>ItemListDelegate.qml</file>
+        <file>CheckboxDelegate.qml</file>
+        <file>WorkoutSingle.qml</file>
+        <file>WorkoutSingleForm.ui.qml</file>
     </qresource>
 </RCC>
